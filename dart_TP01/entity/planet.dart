@@ -1,9 +1,6 @@
 class Planet {
-  late final String name;
-  late final double distanceFromEarth;
+  String name;
+  double distanceFromEarth;
 
-  Planet(String name, double distanceFromEarth) {
-    this.name = name;
-    this.distanceFromEarth = distanceFromEarth;
-  }
+  Planet(String this.name, double this.distanceFromEarth);
 }

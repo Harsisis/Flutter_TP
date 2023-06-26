@@ -1,6 +1,6 @@
-import 'entity/planet.dart';
-import 'entity/solar_system_element.dart';
-import 'enums/kind_enum.dart';
+import '../entity/planet.dart';
+import '../entity/solar_system_element.dart';
+import '../enums/kind_enum.dart';
 
 List<String> setPlanets() {
   List<String> planets = <String>[];

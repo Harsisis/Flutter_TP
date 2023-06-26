@@ -1,8 +1,9 @@
-import 'collection_dart.dart';
+import 'service/collection_dart.dart';
 import 'entity/planet.dart';
 import 'entity/solar_system_element.dart';
-import 'number_dart.dart';
-import 'string_dart.dart';
+import 'service/lambda_dart.dart';
+import 'service/number_dart.dart';
+import 'service/string_dart.dart';
 
 void main() {
   print("### String exercices ###");
@@ -116,4 +117,25 @@ void main() {
   solarSystem.forEach((element) {
     print("${element.name} - ${element.kind.name}");
   });
+
+  print("### lambda exercices ###");
+  print("\n## 1");
+  sayHello("Gauthier");
+
+  print("\n## 2");
+  print(somme(5, 6));
+  print("\n## 3");
+  print(sumMany([1, 2, 3, 4, 5, 6, 7, 8, 9]));
+  print("\n## 4");
+  sumAndPrint(5, 2, true);
+  sumAndPrint(5, 7, false);
+  print("\n## 5");
+  sumAndFormat(4, 5, true);
+  sumAndFormat(4, 5);
+  print("\n## 6");
+  print(reversedString("hello"));
+  print("\n## 7");
+  for (int i = 0; i < 17; i++) {
+    print(fibonacci(i));
+  }
 }
