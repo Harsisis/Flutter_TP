@@ -23,9 +23,9 @@ void PrintStringLenght(String string) {
 }
 
 void PrintReplaceLetters(String string) {
-  string.replaceAll("e", "3");
-  string.replaceAll("l", "1");
-  string.replaceAll("o", "8");
+  string = string.replaceAll(RegExp(r'e'), '3');
+  string = string.replaceAll(RegExp(r'l'), '1');
+  string = string.replaceAll(RegExp(r'o'), '8');
   print(string);
 }
 
