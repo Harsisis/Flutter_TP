@@ -19,4 +19,12 @@ class User {
   void sayHello() {
     print("Hello, I'm ${this.firstName} ${this.lastName} !");
   }
+
+  bool authenticate(String passwordToTest) {
+    if (this._password == null) {
+      return false;
+    } else {
+      return passwordToTest.compareTo(_password!) == 0;
+    }
+  }
 }
