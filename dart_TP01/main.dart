@@ -1,46 +1,119 @@
+import 'collection_dart.dart';
+import 'entity/planet.dart';
+import 'entity/solar_system_element.dart';
+import 'number_dart.dart';
 import 'string_dart.dart';
 
 void main() {
+  print("### String exercices ###");
 // 1
   print("\n## 1");
-  HelloWorld();
+  helloWorld();
 // 2
   print("\n## 2");
-  PrintBis("Hello World Bis");
+  printBis("Hello World Bis");
 // 3
   print("\n## 3");
   const String HELLO = "Hello";
   const String WORLD = "World";
-  PrintInterpolation(HELLO, WORLD);
+  printInterpolation(HELLO, WORLD);
 // 4
   print("\n## 4");
-  PrintConcatenation(HELLO, WORLD);
+  printConcatenation(HELLO, WORLD);
 // 5
   print("\n## 5");
-  PrintFirstWord("Hello World !");
+  printFirstWord("Hello World !");
 // 6
   print("\n## 6");
   const String HELLO_WORLD = "Hello World !";
-  PrintStringLenght(HELLO_WORLD);
+  printStringLenght(HELLO_WORLD);
 //7
   print("\n## 7");
   const String WELCOME = "Hello, World !";
-  PrintReplaceLetters(WELCOME);
+  printReplaceLetters(WELCOME);
 //8
   print("\n## 8");
   const WELCOME_WORLD = "Hello World";
-  List<String> words = GetListOfWords(WELCOME_WORLD);
+  List<String> words = getListOfWords(WELCOME_WORLD);
   print(words.length);
 //9
   print("\n## 9");
   String pwd = "";
-  PrintCheckPassword(pwd);
+  printCheckPassword(pwd);
   pwd = "notEmpty";
-  PrintCheckPassword(pwd);
+  printCheckPassword(pwd);
 //10
   print("\n## 10");
   String mail = "notAMail";
-  PrintCheckMail(mail);
+  printCheckMail(mail);
   mail = "mail@mail.com";
-  PrintCheckMail(mail);
+  printCheckMail(mail);
+
+  print("### Number exercices ###");
+  print("\n## 1");
+  int price1 = 10;
+  double price2 = 5.5;
+  printPrices(price1, price2);
+
+  print("\n## 2");
+  double sum = getSum(price1, price2);
+  print(sum);
+
+  print("\n## 3");
+  print(sum.runtimeType);
+
+  print("\n## 4");
+  print(sum.round());
+
+  print("\n## 5");
+  const String STR_SEVEN = "7";
+  int numSeven = toInteger(STR_SEVEN);
+  print(numSeven.runtimeType);
+
+  print("### Collections exercices ###");
+  List<String> planets = setPlanets();
+  print("\n## 1");
+  showUnAlphabeticalPlanets(planets);
+
+  print("\n## 2");
+  setToUpperCase(planets);
+  showUnAlphabeticalPlanets(planets);
+
+  print("\n## 3");
+  showFirstLetter(planets);
+
+  print("\n## 4");
+  showIndexedPlanets(planets);
+
+  print("\n## 5");
+  printOnlyPlanetsWithVoyelle(planets);
+
+  print("\n## 6");
+  planets.add("PLUTON");
+  showUnAlphabeticalPlanets(planets);
+
+  print("\n## 7");
+  List<Planet> planetTypeList = setPlanetTypeList();
+  showPlanetsListByDescendingDistanceFromEarth(planetTypeList);
+
+  print("\n## 8");
+  Map<String, String> map = getApolloMap();
+  print(map);
+  print("#");
+  print(map["07_1971"]);
+  print("#");
+  print(map.keys);
+  print("#");
+  print(map.values);
+
+  print("\n## 9");
+  print(map["07_1969"]);
+  map["07_1969"] = "Neil Armstrong + Buzz Aldrin";
+  print(map["07_1969"]);
+
+  print("\n## 10");
+  List<SolarSystemElement> solarSystem = getSolarSystem();
+  solarSystem.forEach((element) {
+    print("${element.name} - ${element.kind.name}");
+  });
 }
