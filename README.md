@@ -2,7 +2,7 @@
 
 Gauthier Cadet
 
-## TP01 : Exercices
+## TP01 : Exercices dart
 1. String ✅
 2. Number ✅
 3. Collections ✅
@@ -11,4 +11,6 @@ Gauthier Cadet
 
 ## TP02 : Mona Lisa ✅
 
-## TP03 : Pomme, Poire et Ananas 🔄️
+## TP03 : Pomme, Poire et Ananas ✅
+
+## TP04 : Casino 🔄️
