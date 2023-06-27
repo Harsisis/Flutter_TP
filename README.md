@@ -2,7 +2,7 @@
 
 Gauthier Cadet
 
-## Exercices
+## TP01 : Exercices
 1. String ✅
 2. Number ✅
 3. Collections ✅
