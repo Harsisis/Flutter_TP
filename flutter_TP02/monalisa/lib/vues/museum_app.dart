@@ -9,8 +9,9 @@ class MuseumApp extends StatelessWidget {
     return MaterialApp(
       title: "Museum",
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.brown),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
         useMaterial3: true,
+        fontFamily: 'Merriweather',
       ),
       home: const Artwork(),
     );
