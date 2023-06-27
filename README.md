@@ -11,4 +11,6 @@ Gauthier Cadet
 
 ## TP02 : Mona Lisa ✅
 
-## TP03 : Pomme, Poire et Ananas 🔄️
+## TP03 : Pomme, Poire et Ananas ✅
+
+## TP04 : Casino 🔄️
