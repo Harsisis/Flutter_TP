@@ -31,10 +31,6 @@ class _CasinoBodyState extends State<CasinoBody> {
       _value2 = Random().nextInt(7);
       _value3 = Random().nextInt(7);
 
-      _value1 = 6;
-      _value2 = 6;
-      _value3 = 6;
-
       if (_value1 == _value2 && _value2 == _value3) {
         _showSimpleModalDialog(context);
         _confettiController.play();
@@ -72,6 +68,7 @@ class _CasinoBodyState extends State<CasinoBody> {
                         confettiController: _confettiController,
                         blastDirection: -pi / 2,
                         numberOfParticles: 50,
+                        blastDirectionality: BlastDirectionality.explosive,
                       ),
                     )
                   ],
