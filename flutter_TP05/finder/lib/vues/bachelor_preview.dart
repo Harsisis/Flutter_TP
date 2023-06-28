@@ -52,15 +52,24 @@ class _BachelorPreview extends State<BachelorPreview> {
                 width: 50,
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("${widget.bachelor.firstname} ${widget.bachelor.lastname}",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18)),
-                Text("${widget.bachelor.description}")
-              ],
-            )
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                      "${widget.bachelor.firstname} ${widget.bachelor.lastname}",
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 18)),
+                  Text(
+                    "${widget.bachelor.description}",
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: false,
+                    maxLines: 1,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
