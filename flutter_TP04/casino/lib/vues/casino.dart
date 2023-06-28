@@ -9,7 +9,10 @@ class Casino extends StatelessWidget {
     return MaterialApp(
       title: "Casino",
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.orangeAccent,
+          background: const Color.fromARGB(115, 38, 38, 38),
+        ),
         useMaterial3: true,
       ),
       home: const CasinoBody(),

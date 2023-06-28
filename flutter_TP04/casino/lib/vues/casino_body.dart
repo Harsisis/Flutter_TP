@@ -46,6 +46,9 @@ class _CasinoBodyState extends State<CasinoBody> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0)),
             child: Container(
+              decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                  borderRadius: BorderRadius.circular(20.0)),
               constraints: const BoxConstraints(maxHeight: 150),
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
@@ -55,7 +58,7 @@ class _CasinoBodyState extends State<CasinoBody> {
                     RichText(
                       textAlign: TextAlign.center,
                       text: const TextSpan(
-                          text: "Jackpot !",
+                          text: "🎆 Jackpot ! 🎆",
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 25,
@@ -88,20 +91,29 @@ class _CasinoBodyState extends State<CasinoBody> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
               CasinoItem(value: _value1),
               CasinoItem(value: _value2),
               CasinoItem(value: _value3),
-            ])
+            ]),
+            ElevatedButton(
+              onPressed: _play,
+              child: Container(
+                padding: const EdgeInsets.only(
+                    left: 40.0, right: 40.0, top: 30.0, bottom: 30.0),
+                child: const Text(
+                  "Jouer",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 25,
+                      wordSpacing: 1),
+                ),
+              ),
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _play,
-        tooltip: 'play',
-        child: const Icon(Icons.add_shopping_cart_rounded),
       ),
     );
   }
