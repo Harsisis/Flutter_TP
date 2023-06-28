@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import '../models/bachelor.dart';
 import 'bachelor_preview.dart';
 
-class BachelorLikedList extends StatefulWidget {
-  const BachelorLikedList({super.key, required this.likedBachelors});
+class FinderLikedListBody extends StatefulWidget {
+  const FinderLikedListBody({super.key});
 
   final List<Bachelor> likedBachelors;
 
   @override
-  State<StatefulWidget> createState() => _BachelorLikedList();
+  State<StatefulWidget> createState() => _FinderLikedListBody();
 }
 
-class _BachelorLikedList extends State<BachelorLikedList> {
+class _FinderLikedListBody extends State<FinderLikedListBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

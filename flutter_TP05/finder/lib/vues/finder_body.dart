@@ -1,11 +1,10 @@
 import 'package:finder/models/bachelor.dart';
 import 'package:flutter/material.dart';
 
-import 'bachelor_liked_list.dart';
 import 'bachelor_preview.dart';
 
 class FinderBody extends StatefulWidget {
-  const FinderBody({super.key, required this.bachelors});
+  const FinderBody({super.key});
 
   final List<Bachelor> bachelors;
 
@@ -14,8 +13,6 @@ class FinderBody extends StatefulWidget {
 }
 
 class _FinderBody extends State<FinderBody> {
-  List<Bachelor> likedBachelors = [];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,22 +27,8 @@ class _FinderBody extends State<FinderBody> {
         child: ListView.builder(
             itemCount: widget.bachelors.length,
             itemBuilder: (BuildContext context, int index) {
-              return BachelorPreview(
-                  bachelor: widget.bachelors[index],
-                  likedBachelors: likedBachelors);
+              return BachelorPreview(bachelor: widget.bachelors[index]);
             }),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    BachelorLikedList(likedBachelors: likedBachelors)),
-          );
-        },
-        tooltip: "go to liked bachelors page",
-        child: const Icon(Icons.favorite_border_rounded),
       ),
     );
   }

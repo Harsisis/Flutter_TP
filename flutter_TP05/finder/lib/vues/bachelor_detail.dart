@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/bachelor.dart';
 
 class BachelorDetail extends StatefulWidget {
-  const BachelorDetail(
-      {super.key, required this.bachelor, required this.likedBachelors});
+  const BachelorDetail({super.key, required this.bachelor});
 
   final List<Bachelor> likedBachelors;
   final Bachelor bachelor;
