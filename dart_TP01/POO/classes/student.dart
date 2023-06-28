@@ -25,13 +25,6 @@ class Student {
     this._lessons = lessons;
   }
 
-  void addLesson(Lesson lesson) {
-    if (this._lessons == null) {
-      this._lessons = <Lesson>[];
-    }
-    this._lessons.add(lesson);
-  }
-
   List<Lesson> get lessons {
     return this._lessons;
   }
