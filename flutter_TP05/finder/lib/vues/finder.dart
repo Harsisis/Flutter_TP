@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../data/data_giver.dart';
-import 'finder_body.dart';
 
 class Finder extends StatelessWidget {
   Finder({super.key});
@@ -11,6 +10,7 @@ class Finder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routerConfig: _router;
       title: "Finder",
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
