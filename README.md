@@ -13,4 +13,6 @@ Gauthier Cadet
 
 ## TP03 : Pomme, Poire et Ananas ✅
 
-## TP04 : Casino 🔄️
+## TP04 : Casino ✅
+
+## TP05 : Image Finder 🔄️
