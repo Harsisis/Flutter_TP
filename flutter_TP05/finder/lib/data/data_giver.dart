@@ -5,13 +5,13 @@ import 'package:finder/models/bachelor.dart';
 import 'package:faker/faker.dart';
 
 class DataGiver {
-  final String imagePath = "assets/images/";
+  final String imagePath = "./assets/images/";
 
   late List<Bachelor> bachelors;
 
   DataGiver() {
     bachelors = [];
-    for (int i = 0; i < 15; i++) {
+    for (int i = 0; i < 30; i++) {
       Random random = Random();
       GenderEnum genderEnum = GenderEnum.getById(i % 2);
 
@@ -27,7 +27,7 @@ class DataGiver {
           firstname: faker.person.firstName(),
           lastname: faker.person.lastName(),
           gender: genderEnum,
-          avatar: "$imagePath${genderEnum.gender}-${random.nextInt(15) + 1}",
+          avatar: "$imagePath${genderEnum.gender}-${random.nextInt(15) + 1}.png",
           job: faker.job.title(),
           description: faker.lorem.sentence(),
           searchFor: searchFor));

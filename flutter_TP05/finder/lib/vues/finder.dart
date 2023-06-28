@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../data/data_giver.dart';
 import 'finder_body.dart';
 
 class Finder extends StatelessWidget {
-  const Finder({super.key});
+  Finder({super.key});
+
+  final DataGiver dataGiver = DataGiver();
 
   @override
   Widget build(BuildContext context) {
@@ -11,12 +14,14 @@ class Finder extends StatelessWidget {
       title: "Finder",
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.pinkAccent,
-          background: const Color.fromARGB(115, 38, 38, 38),
+          seedColor: Colors.amber,
+          background: Colors.white,
         ),
         useMaterial3: true,
       ),
-      home: const FinderBody(),
+      home: FinderBody(
+        bachelors: dataGiver.bachelors,
+      ),
     );
   }
 }

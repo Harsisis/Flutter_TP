@@ -17,4 +17,9 @@ class Bachelor {
       this.searchFor = const [],
       this.job = "",
       this.description = ""});
+
+  @override
+  String toString() {
+    return "${gender.gender} : $firstname $lastname | \tavatar: $avatar | job: $job | description: $description";
+  }
 }
