@@ -50,7 +50,10 @@ class _BachelorDetail extends State<BachelorDetail> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Finder ❤️"),
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [Text("Finder"), Icon(Icons.favorite_border_rounded)],
+        ),
       ),
       body: Center(
         child: Column(

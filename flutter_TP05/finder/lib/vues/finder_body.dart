@@ -1,6 +1,7 @@
 import 'package:finder/models/bachelor.dart';
 import 'package:flutter/material.dart';
 
+import 'bachelor_liked_list.dart';
 import 'bachelor_preview.dart';
 
 class FinderBody extends StatefulWidget {
@@ -20,7 +21,10 @@ class _FinderBody extends State<FinderBody> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Finder ❤️"),
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [Text("Finder"), Icon(Icons.favorite_border_rounded)],
+        ),
       ),
       body: Center(
         child: ListView.builder(
@@ -30,6 +34,18 @@ class _FinderBody extends State<FinderBody> {
                   bachelor: widget.bachelors[index],
                   likedBachelors: likedBachelors);
             }),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    BachelorLikedList(likedBachelors: likedBachelors)),
+          );
+        },
+        tooltip: "go to liked bachelors page",
+        child: const Icon(Icons.favorite_border_rounded),
       ),
     );
   }
