@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../models/bachelor.dart';
 
 class BachelorDetail extends StatefulWidget {
-  const BachelorDetail({super.key, required this.bachelor});
+  const BachelorDetail(
+      {super.key, required this.bachelor, required this.likedBachelors});
 
+  final List<Bachelor> likedBachelors;
   final Bachelor bachelor;
 
   @override
@@ -14,10 +16,18 @@ class BachelorDetail extends StatefulWidget {
 class _BachelorDetail extends State<BachelorDetail> {
   bool _isLiked = false;
 
+  @override
+  void initState() {
+    super.initState();
+    _isLiked = widget.likedBachelors.contains(widget.bachelor);
+  }
+
   void _setLikeBachelor() {
     setState(() {
       _isLiked = !_isLiked;
       if (_isLiked) {
+        widget.likedBachelors.add(widget.bachelor);
+
         final snackBar = SnackBar(
           content: const Text('Bachelor ajouté(e) à vos favoris'),
           action: SnackBarAction(
@@ -27,6 +37,10 @@ class _BachelorDetail extends State<BachelorDetail> {
           duration: const Duration(seconds: 1),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      } else {
+        widget.likedBachelors.removeWhere((bachelor) =>
+            bachelor.firstname == widget.bachelor.firstname &&
+            bachelor.lastname == widget.bachelor.lastname);
       }
     });
   }

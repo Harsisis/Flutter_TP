@@ -4,8 +4,10 @@ import '../models/bachelor.dart';
 import 'bachelor_detail.dart';
 
 class BachelorPreview extends StatefulWidget {
-  const BachelorPreview({super.key, required this.bachelor});
+  const BachelorPreview(
+      {super.key, required this.bachelor, required this.likedBachelors});
 
+  final List<Bachelor> likedBachelors;
   final Bachelor bachelor;
 
   @override
@@ -20,7 +22,9 @@ class _BachelorPreview extends State<BachelorPreview> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => BachelorDetail(bachelor: widget.bachelor)),
+              builder: (context) => BachelorDetail(
+                  bachelor: widget.bachelor,
+                  likedBachelors: widget.likedBachelors)),
         );
       },
       child: Container(

@@ -13,6 +13,8 @@ class FinderBody extends StatefulWidget {
 }
 
 class _FinderBody extends State<FinderBody> {
+  List<Bachelor> likedBachelors = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +26,9 @@ class _FinderBody extends State<FinderBody> {
         child: ListView.builder(
             itemCount: widget.bachelors.length,
             itemBuilder: (BuildContext context, int index) {
-              return BachelorPreview(bachelor: widget.bachelors[index]);
+              return BachelorPreview(
+                  bachelor: widget.bachelors[index],
+                  likedBachelors: likedBachelors);
             }),
       ),
     );
