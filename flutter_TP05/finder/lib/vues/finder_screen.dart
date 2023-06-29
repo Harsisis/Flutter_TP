@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../models/bachelor.dart';
 import 'bachelor_preview.dart';
 
 class FinderScreen extends StatefulWidget {
@@ -13,9 +14,30 @@ class FinderScreen extends StatefulWidget {
 }
 
 class _FinderScreen extends State<FinderScreen> {
+  late BachelorListProvider bachelorListProvider;
+  late List<Bachelor> filteredBachelorList;
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    _controller = TextEditingController();
+    super.initState();
+  }
+
+  void _searchName(String name) {
+    setState(() {
+      bachelorListProvider.setFilteredBachelors(bachelorListProvider
+          .getBachelors
+          .where((bach) =>
+              bach.firstname.toLowerCase().contains(name.toLowerCase()))
+          .toList());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    BachelorListProvider bachelorList = context.watch<BachelorListProvider>();
+    bachelorListProvider = context.watch<BachelorListProvider>();
+    filteredBachelorList = bachelorListProvider.getFilteredBachelors;
 
     return Scaffold(
       appBar: AppBar(
@@ -26,13 +48,26 @@ class _FinderScreen extends State<FinderScreen> {
         ),
       ),
       body: Center(
-        child: ListView.builder(
-          itemCount: bachelorList.getBachelors.length,
-          itemBuilder: (BuildContext context, int index) {
-            return BachelorPreview(bachelor: bachelorList.getBachelors[index]);
-          },
-        ),
-      ),
+          child: Column(
+        children: [
+          TextField(
+            controller: _controller,
+            onChanged: _searchName,
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+              hintText: 'Rechercher par nom'
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: filteredBachelorList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return BachelorPreview(bachelor: filteredBachelorList[index]);
+              },
+            ),
+          )
+        ],
+      )),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.go('/liked'),
         tooltip: "go to liked bachelors page",

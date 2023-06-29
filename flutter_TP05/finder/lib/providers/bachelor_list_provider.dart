@@ -5,9 +5,11 @@ import '../models/bachelor.dart';
 class BachelorListProvider extends ChangeNotifier {
   final List<Bachelor> _likedBachelorsList = [];
   late List<Bachelor> _bachelorsList = [];
+  late List<Bachelor> _filteredBachelorsList = [];
 
   BachelorListProvider(List<Bachelor> bachelors) {
     _bachelorsList = bachelors;
+    _filteredBachelorsList = bachelors;
   }
 
   void addLiked(Bachelor bachelor) {
@@ -50,6 +52,10 @@ class BachelorListProvider extends ChangeNotifier {
     return _bachelorsList.where((bach) => bach.hide == false).toList();
   }
 
+  List<Bachelor> get getFilteredBachelors {
+    return _filteredBachelorsList;
+  }
+
   Bachelor getBachelorById(int id) {
     return _bachelorsList.firstWhere((bach) => bach.id == id);
   }
@@ -60,5 +66,9 @@ class BachelorListProvider extends ChangeNotifier {
 
   void show(Bachelor bachelor) {
     _bachelorsList.firstWhere((bach) => bach.id == bachelor.id).hide = false;
+  }
+
+  void setFilteredBachelors(List<Bachelor> list) {
+    _filteredBachelorsList = list;
   }
 }
