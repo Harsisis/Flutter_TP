@@ -1,6 +1,7 @@
 import 'package:finder/enums/gender_enum.dart';
 
 class Bachelor {
+  int id;
   String firstname;
   String lastname;
   GenderEnum gender;
@@ -10,7 +11,8 @@ class Bachelor {
   String? description;
 
   Bachelor(
-      {required this.firstname,
+      {required this.id,
+      required this.firstname,
       required this.lastname,
       required this.gender,
       required this.avatar,
