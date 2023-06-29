@@ -6,7 +6,6 @@ import 'bachelor_detail.dart';
 class BachelorPreview extends StatefulWidget {
   const BachelorPreview({super.key, required this.bachelor});
 
-  final List<Bachelor> likedBachelors;
   final Bachelor bachelor;
 
   @override

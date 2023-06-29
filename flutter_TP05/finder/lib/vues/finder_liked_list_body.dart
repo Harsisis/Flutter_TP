@@ -1,12 +1,12 @@
+import 'package:finder/structures/bachelor_list.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
-import '../models/bachelor.dart';
 import 'bachelor_preview.dart';
 
 class FinderLikedListBody extends StatefulWidget {
   const FinderLikedListBody({super.key});
-
-  final List<Bachelor> likedBachelors;
 
   @override
   State<StatefulWidget> createState() => _FinderLikedListBody();
@@ -15,6 +15,8 @@ class FinderLikedListBody extends StatefulWidget {
 class _FinderLikedListBody extends State<FinderLikedListBody> {
   @override
   Widget build(BuildContext context) {
+    BachelorList bachelorList = context.watch<BachelorList>();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -25,12 +27,16 @@ class _FinderLikedListBody extends State<FinderLikedListBody> {
       ),
       body: Center(
         child: ListView.builder(
-            itemCount: widget.likedBachelors.length,
+            itemCount: bachelorList.getLikedBachelors.length,
             itemBuilder: (BuildContext context, int index) {
               return BachelorPreview(
-                  bachelor: widget.likedBachelors[index],
-                  likedBachelors: widget.likedBachelors);
+                  bachelor: bachelorList.getLikedBachelors[index]);
             }),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => context.go('/'),
+        tooltip: "go back to the Home page",
+        child: const Icon(Icons.house_rounded),
       ),
     );
   }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../models/bachelor.dart';
+import '../structures/bachelor_list.dart';
 
 class BachelorDetail extends StatefulWidget {
   const BachelorDetail({super.key, required this.bachelor});
-
-  final List<Bachelor> likedBachelors;
   final Bachelor bachelor;
 
   @override
@@ -14,18 +14,13 @@ class BachelorDetail extends StatefulWidget {
 
 class _BachelorDetail extends State<BachelorDetail> {
   bool _isLiked = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _isLiked = widget.likedBachelors.contains(widget.bachelor);
-  }
+  late BachelorList _bachelorList;
 
   void _setLikeBachelor() {
     setState(() {
       _isLiked = !_isLiked;
       if (_isLiked) {
-        widget.likedBachelors.add(widget.bachelor);
+        _bachelorList.addLiked(widget.bachelor);
 
         final snackBar = SnackBar(
           content: const Text('Bachelor ajouté(e) à vos favoris'),
@@ -37,15 +32,17 @@ class _BachelorDetail extends State<BachelorDetail> {
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       } else {
-        widget.likedBachelors.removeWhere((bachelor) =>
-            bachelor.firstname == widget.bachelor.firstname &&
-            bachelor.lastname == widget.bachelor.lastname);
+        _bachelorList.removeOneLiked(widget.bachelor);
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    _bachelorList = context.watch<BachelorList>();
+
+    _isLiked = _bachelorList.getLikedBachelors.contains(widget.bachelor);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,

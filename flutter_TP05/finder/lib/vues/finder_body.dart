@@ -1,12 +1,12 @@
-import 'package:finder/models/bachelor.dart';
+import 'package:finder/structures/bachelor_list.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import 'bachelor_preview.dart';
 
 class FinderBody extends StatefulWidget {
   const FinderBody({super.key});
-
-  final List<Bachelor> bachelors;
 
   @override
   State<StatefulWidget> createState() => _FinderBody();
@@ -15,6 +15,8 @@ class FinderBody extends StatefulWidget {
 class _FinderBody extends State<FinderBody> {
   @override
   Widget build(BuildContext context) {
+    BachelorList bachelorList = context.watch<BachelorList>();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -25,10 +27,15 @@ class _FinderBody extends State<FinderBody> {
       ),
       body: Center(
         child: ListView.builder(
-            itemCount: widget.bachelors.length,
+            itemCount: bachelorList.getBachelors.length,
             itemBuilder: (BuildContext context, int index) {
-              return BachelorPreview(bachelor: widget.bachelors[index]);
+              return BachelorPreview(bachelor: bachelorList.getBachelors[index]);
             }),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => context.go('/liked'),
+        tooltip: "go to liked bachelors page",
+        child: const Icon(Icons.favorite_border_rounded),
       ),
     );
   }
