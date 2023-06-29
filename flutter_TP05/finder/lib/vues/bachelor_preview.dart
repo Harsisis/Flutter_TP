@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../models/bachelor.dart';
-import 'bachelor_detail.dart';
 
 class BachelorPreview extends StatefulWidget {
   const BachelorPreview({super.key, required this.bachelor});
@@ -17,11 +17,7 @@ class _BachelorPreview extends State<BachelorPreview> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => BachelorDetail(bachelor: widget.bachelor)),
-        );
+        context.go("/details/${widget.bachelor.id}");
       },
       child: Container(
         margin: const EdgeInsets.all(10.0),

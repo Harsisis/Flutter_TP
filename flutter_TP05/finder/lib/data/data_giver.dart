@@ -24,6 +24,7 @@ class DataGiver {
       }
 
       bachelors.add(Bachelor(
+          id: (i + 1),
           firstname: faker.person.firstName(),
           lastname: faker.person.lastName(),
           gender: genderEnum,

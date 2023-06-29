@@ -1,6 +1,7 @@
+import 'package:finder/vues/bachelor_detail.dart';
 import 'package:finder/vues/finder.dart';
-import 'package:finder/vues/finder_body.dart';
-import 'package:finder/vues/finder_liked_list_body.dart';
+import 'package:finder/vues/finder_screen.dart';
+import 'package:finder/vues/finder_liked_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -13,15 +14,16 @@ GoRouter router() {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const FinderBody(),
+        builder: (context, state) => const FinderScreen(),
         routes: [
           GoRoute(
             path: 'liked',
-            builder: (context, state) => const FinderLikedListBody(),
+            builder: (context, state) => const FinderLikedListScreen(),
           ),
           GoRoute(
-            path: 'details',
-            builder: (context, state) => const FinderLikedListBody(),
+            path: 'details/:id',
+            builder: (context, state) =>
+                BachelorDetail(id: int.parse(state.pathParameters['id'] ?? "")),
           ),
         ],
       ),

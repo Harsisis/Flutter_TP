@@ -5,14 +5,14 @@ import 'package:provider/provider.dart';
 
 import 'bachelor_preview.dart';
 
-class FinderLikedListBody extends StatefulWidget {
-  const FinderLikedListBody({super.key});
+class FinderScreen extends StatefulWidget {
+  const FinderScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => _FinderLikedListBody();
+  State<StatefulWidget> createState() => _FinderScreen();
 }
 
-class _FinderLikedListBody extends State<FinderLikedListBody> {
+class _FinderScreen extends State<FinderScreen> {
   @override
   Widget build(BuildContext context) {
     BachelorList bachelorList = context.watch<BachelorList>();
@@ -27,16 +27,15 @@ class _FinderLikedListBody extends State<FinderLikedListBody> {
       ),
       body: Center(
         child: ListView.builder(
-            itemCount: bachelorList.getLikedBachelors.length,
+            itemCount: bachelorList.getBachelors.length,
             itemBuilder: (BuildContext context, int index) {
-              return BachelorPreview(
-                  bachelor: bachelorList.getLikedBachelors[index]);
+              return BachelorPreview(bachelor: bachelorList.getBachelors[index]);
             }),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.go('/'),
-        tooltip: "go back to the Home page",
-        child: const Icon(Icons.house_rounded),
+        onPressed: () => context.go('/liked'),
+        tooltip: "go to liked bachelors page",
+        child: const Icon(Icons.favorite_border_rounded),
       ),
     );
   }

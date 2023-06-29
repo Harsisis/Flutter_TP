@@ -42,13 +42,15 @@ class BachelorList extends ChangeNotifier {
   }
 
   void removeOne(Bachelor bachelor) {
-    _bachelorsList.removeWhere((bach) =>
-        bach.firstname == bachelor.firstname &&
-        bach.lastname == bachelor.lastname);
+    _bachelorsList.removeWhere((bach) => bach.id == bachelor.id);
     notifyListeners();
   }
 
   List<Bachelor> get getBachelors {
     return _bachelorsList;
+  }
+
+  Bachelor getBachelorById(int id) {
+    return _bachelorsList.firstWhere((bach) => bach.id == id);
   }
 }

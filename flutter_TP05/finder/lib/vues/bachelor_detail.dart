@@ -5,8 +5,8 @@ import '../models/bachelor.dart';
 import '../structures/bachelor_list.dart';
 
 class BachelorDetail extends StatefulWidget {
-  const BachelorDetail({super.key, required this.bachelor});
-  final Bachelor bachelor;
+  const BachelorDetail({super.key, required this.id});
+  final int id;
 
   @override
   State<StatefulWidget> createState() => _BachelorDetail();
@@ -15,12 +15,13 @@ class BachelorDetail extends StatefulWidget {
 class _BachelorDetail extends State<BachelorDetail> {
   bool _isLiked = false;
   late BachelorList _bachelorList;
+  late Bachelor _bachelor;
 
   void _setLikeBachelor() {
     setState(() {
       _isLiked = !_isLiked;
       if (_isLiked) {
-        _bachelorList.addLiked(widget.bachelor);
+        _bachelorList.addLiked(_bachelor);
 
         final snackBar = SnackBar(
           content: const Text('Bachelor ajouté(e) à vos favoris'),
@@ -32,7 +33,7 @@ class _BachelorDetail extends State<BachelorDetail> {
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       } else {
-        _bachelorList.removeOneLiked(widget.bachelor);
+        _bachelorList.removeOneLiked(_bachelor);
       }
     });
   }
@@ -40,8 +41,8 @@ class _BachelorDetail extends State<BachelorDetail> {
   @override
   Widget build(BuildContext context) {
     _bachelorList = context.watch<BachelorList>();
-
-    _isLiked = _bachelorList.getLikedBachelors.contains(widget.bachelor);
+    _bachelor = _bachelorList.getBachelorById(widget.id);
+    _isLiked = _bachelorList.getLikedBachelors.contains(_bachelor);
 
     return Scaffold(
       appBar: AppBar(
@@ -75,7 +76,7 @@ class _BachelorDetail extends State<BachelorDetail> {
                   GestureDetector(
                     onDoubleTap: _setLikeBachelor,
                     child: Image.asset(
-                      widget.bachelor.avatar,
+                      _bachelor.avatar,
                       height: 200,
                       width: 200,
                     ),
@@ -95,13 +96,13 @@ class _BachelorDetail extends State<BachelorDetail> {
               ),
             ),
             Text(
-              "${widget.bachelor.firstname} ${widget.bachelor.lastname}",
+              "${_bachelor.firstname} ${_bachelor.lastname}",
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
-            Text("${widget.bachelor.job}"),
+            Text("${_bachelor.job}"),
             Expanded(
-              child: Text("${widget.bachelor.description}"),
+              child: Text("${_bachelor.description}"),
             ),
           ],
         ),
