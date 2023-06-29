@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 
 import '../models/bachelor.dart';
 
-class BachelorList extends ChangeNotifier {
+class BachelorListProvider extends ChangeNotifier {
   final List<Bachelor> _likedBachelorsList = [];
   late List<Bachelor> _bachelorsList = [];
 
-  BachelorList(List<Bachelor> bachelors) {
+  BachelorListProvider(List<Bachelor> bachelors) {
     _bachelorsList = bachelors;
   }
 
@@ -47,10 +47,18 @@ class BachelorList extends ChangeNotifier {
   }
 
   List<Bachelor> get getBachelors {
-    return _bachelorsList;
+    return _bachelorsList.where((bach) => bach.hide == false).toList();
   }
 
   Bachelor getBachelorById(int id) {
     return _bachelorsList.firstWhere((bach) => bach.id == id);
+  }
+
+  void hide(Bachelor bachelor) {
+    _bachelorsList.firstWhere((bach) => bach.id == bachelor.id).hide = true;
+  }
+
+  void show(Bachelor bachelor) {
+    _bachelorsList.firstWhere((bach) => bach.id == bachelor.id).hide = false;
   }
 }

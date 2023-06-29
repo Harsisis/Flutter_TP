@@ -1,4 +1,4 @@
-import 'package:finder/structures/bachelor_list.dart';
+import 'package:finder/providers/bachelor_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +15,7 @@ class FinderScreen extends StatefulWidget {
 class _FinderScreen extends State<FinderScreen> {
   @override
   Widget build(BuildContext context) {
-    BachelorList bachelorList = context.watch<BachelorList>();
+    BachelorListProvider bachelorList = context.watch<BachelorListProvider>();
 
     return Scaffold(
       appBar: AppBar(
@@ -27,10 +27,11 @@ class _FinderScreen extends State<FinderScreen> {
       ),
       body: Center(
         child: ListView.builder(
-            itemCount: bachelorList.getBachelors.length,
-            itemBuilder: (BuildContext context, int index) {
-              return BachelorPreview(bachelor: bachelorList.getBachelors[index]);
-            }),
+          itemCount: bachelorList.getBachelors.length,
+          itemBuilder: (BuildContext context, int index) {
+            return BachelorPreview(bachelor: bachelorList.getBachelors[index]);
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.go('/liked'),

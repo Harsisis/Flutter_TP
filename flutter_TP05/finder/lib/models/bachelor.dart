@@ -9,6 +9,7 @@ class Bachelor {
   List<GenderEnum>? searchFor;
   String? job;
   String? description;
+  late bool hide = false;
 
   Bachelor(
       {required this.id,

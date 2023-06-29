@@ -1,4 +1,4 @@
-import 'package:finder/structures/bachelor_list.dart';
+import 'package:finder/providers/bachelor_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +15,7 @@ class FinderLikedListScreen extends StatefulWidget {
 class _FinderLikedListScreen extends State<FinderLikedListScreen> {
   @override
   Widget build(BuildContext context) {
-    BachelorList bachelorList = context.watch<BachelorList>();
+    BachelorListProvider bachelorList = context.watch<BachelorListProvider>();
 
     return Scaffold(
       appBar: AppBar(

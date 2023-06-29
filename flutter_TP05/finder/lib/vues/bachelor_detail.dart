@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/bachelor.dart';
-import '../structures/bachelor_list.dart';
+import '../providers/bachelor_list_provider.dart';
 
 class BachelorDetail extends StatefulWidget {
   const BachelorDetail({super.key, required this.id});
@@ -14,13 +14,17 @@ class BachelorDetail extends StatefulWidget {
 
 class _BachelorDetail extends State<BachelorDetail> {
   bool _isLiked = false;
-  late BachelorList _bachelorList;
+  bool _isDisliked = false;
+  late BachelorListProvider _bachelorList;
   late Bachelor _bachelor;
 
   void _setLikeBachelor() {
     setState(() {
       _isLiked = !_isLiked;
       if (_isLiked) {
+        _isDisliked = true;
+        _setDislikeBachelor();
+
         _bachelorList.addLiked(_bachelor);
 
         final snackBar = SnackBar(
@@ -29,7 +33,7 @@ class _BachelorDetail extends State<BachelorDetail> {
             label: 'annuler',
             onPressed: _setLikeBachelor,
           ),
-          duration: const Duration(seconds: 1),
+          duration: const Duration(milliseconds: 500),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       } else {
@@ -38,9 +42,33 @@ class _BachelorDetail extends State<BachelorDetail> {
     });
   }
 
+  void _setDislikeBachelor() {
+    setState(() {
+      _isDisliked = !_isDisliked;
+      if (_isDisliked) {
+        _isLiked = true;
+        _setLikeBachelor();
+
+        _bachelorList.hide(_bachelor);
+
+        final snackBar = SnackBar(
+          content: const Text('Bachelor suprimé(e) de la liste'),
+          action: SnackBarAction(
+            label: 'annuler',
+            onPressed: _setDislikeBachelor,
+          ),
+          duration: const Duration(milliseconds: 500),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      } else {
+        _bachelorList.show(_bachelor);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    _bachelorList = context.watch<BachelorList>();
+    _bachelorList = context.watch<BachelorListProvider>();
     _bachelor = _bachelorList.getBachelorById(widget.id);
     _isLiked = _bachelorList.getLikedBachelors.contains(_bachelor);
 
@@ -73,25 +101,47 @@ class _BachelorDetail extends State<BachelorDetail> {
               ),
               child: Stack(
                 children: [
-                  GestureDetector(
-                    onDoubleTap: _setLikeBachelor,
-                    child: Image.asset(
-                      _bachelor.avatar,
-                      height: 200,
-                      width: 200,
+                  Image.asset(
+                    _bachelor.avatar,
+                    height: 200,
+                    width: 200,
+                  ),
+                  Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Opacity(
+                        opacity: _isDisliked ? 1 : 0.7,
+                        child: GestureDetector(
+                          onTap: _setDislikeBachelor,
+                          child: Icon(
+                            Icons.heart_broken,
+                            size: 40,
+                            color: _isDisliked
+                                ? Colors.blue
+                                : const Color.fromARGB(255, 220, 207, 161),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   Positioned.fill(
-                      child: Align(
-                          alignment: Alignment.bottomRight,
-                          child: Opacity(
-                              opacity: _isLiked ? 1 : 0.7,
-                              child: Icon(Icons.favorite,
-                                  size: 30,
-                                  color: _isLiked
-                                      ? Colors.red
-                                      : const Color.fromARGB(
-                                          255, 220, 207, 161)))))
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: Opacity(
+                        opacity: _isLiked ? 1 : 0.7,
+                        child: GestureDetector(
+                          onTap: _setLikeBachelor,
+                          child: Icon(
+                            Icons.favorite,
+                            size: 40,
+                            color: _isLiked
+                                ? Colors.red
+                                : const Color.fromARGB(255, 220, 207, 161),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

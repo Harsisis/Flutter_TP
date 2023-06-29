@@ -1,4 +1,4 @@
-import 'package:finder/structures/bachelor_list.dart';
+import 'package:finder/providers/bachelor_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +13,7 @@ class Finder extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-            create: (context) => BachelorList(DataGiver().bachelors)),
+            create: (context) => BachelorListProvider(DataGiver().bachelors)),
       ],
       child: MaterialApp.router(
         title: "Finder",
