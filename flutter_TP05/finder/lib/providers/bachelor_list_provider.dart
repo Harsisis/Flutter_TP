@@ -55,7 +55,7 @@ class BachelorListProvider extends ChangeNotifier {
   }
 
   List<Bachelor> get getFilteredBachelors {
-    return _filteredBachelorsList;
+    return getFilteredBachlorList(GenderEnum.all, "");
   }
 
   List<Bachelor> getFilteredBachlorList(GenderEnum gender, String name) {
