@@ -1,4 +1,5 @@
 enum GenderEnum {
+  all(gender: "all"),
   female(gender: "woman"),
   male(gender: "man");
 

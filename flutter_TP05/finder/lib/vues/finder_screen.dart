@@ -1,3 +1,4 @@
+import 'package:finder/enums/gender_enum.dart';
 import 'package:finder/providers/bachelor_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,10 +18,12 @@ class _FinderScreen extends State<FinderScreen> {
   late BachelorListProvider bachelorListProvider;
   late List<Bachelor> filteredBachelorList;
   late TextEditingController _controller;
+  late GenderEnum _gender;
 
   @override
   void initState() {
     _controller = TextEditingController();
+    _gender = GenderEnum.all;
     super.initState();
   }
 
@@ -30,6 +33,16 @@ class _FinderScreen extends State<FinderScreen> {
           .getBachelors
           .where((bach) =>
               bach.firstname.toLowerCase().contains(name.toLowerCase()))
+          .toList());
+    });
+  }
+
+  void _sortGender(GenderEnum? value) {
+    setState(() {
+      _gender = value!;
+      bachelorListProvider.setFilteredBachelors(bachelorListProvider
+          .getBachelors
+          .where((bach) => bach.gender == value || value == GenderEnum.all)
           .toList());
     });
   }
@@ -50,12 +63,40 @@ class _FinderScreen extends State<FinderScreen> {
       body: Center(
           child: Column(
         children: [
-          TextField(
-            controller: _controller,
-            onChanged: _searchName,
-            decoration: const InputDecoration(
-              border: InputBorder.none,
-              hintText: 'Rechercher par nom'
+          Container(
+            child: Column(
+              children: [
+                ListTile(
+                  title: Text(GenderEnum.all.gender),
+                  leading: Radio<GenderEnum>(
+                    value: GenderEnum.all,
+                    groupValue: _gender,
+                    onChanged: _sortGender,
+                  ),
+                ),
+                ListTile(
+                  title: Text(GenderEnum.male.gender),
+                  leading: Radio<GenderEnum>(
+                    value: GenderEnum.male,
+                    groupValue: _gender,
+                    onChanged: _sortGender,
+                  ),
+                ),
+                ListTile(
+                  title: Text(GenderEnum.female.gender),
+                  leading: Radio<GenderEnum>(
+                    value: GenderEnum.female,
+                    groupValue: _gender,
+                    onChanged: _sortGender,
+                  ),
+                ),
+                TextField(
+                  controller: _controller,
+                  onChanged: _searchName,
+                  decoration:
+                      const InputDecoration(hintText: 'Search a bachelor'),
+                ),
+              ],
             ),
           ),
           Expanded(

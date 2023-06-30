@@ -13,7 +13,7 @@ class DataGiver {
     bachelors = [];
     for (int i = 0; i < 30; i++) {
       Random random = Random();
-      GenderEnum genderEnum = GenderEnum.getById(i % 2);
+      GenderEnum genderEnum = GenderEnum.getById((i % 2)+1);
 
       List<GenderEnum> searchFor = [];
       if (random.nextBool()) {
