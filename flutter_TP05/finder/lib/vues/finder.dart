@@ -26,8 +26,8 @@ class Finder extends StatelessWidget {
           ),
           dark: ThemeData(
             colorScheme: ColorScheme.fromSeed(
-              seedColor: Colors.green,
-              background: Colors.grey,
+              seedColor: Colors.deepOrangeAccent,
+              background: Colors.black,
             ),
             useMaterial3: true,
           ),

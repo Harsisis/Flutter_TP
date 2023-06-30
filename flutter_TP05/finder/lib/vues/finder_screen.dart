@@ -50,7 +50,8 @@ class _FinderScreen extends State<FinderScreen> {
   @override
   Widget build(BuildContext context) {
     bachelorListProvider = context.watch<BachelorListProvider>();
-    filteredBachelorList = bachelorListProvider.filterBachelorList(_gender, _name);
+    filteredBachelorList =
+        bachelorListProvider.filterBachelorList(_gender, _name);
 
     return Scaffold(
       appBar: AppBar(
@@ -58,70 +59,71 @@ class _FinderScreen extends State<FinderScreen> {
         title: const FinderHeaderTitle(),
       ),
       body: Center(
-          child: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
-            decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primaryContainer),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Flexible(
-                      child: ListTile(
-                        title: Text(GenderEnum.all.gender),
-                        leading: Radio<GenderEnum>(
-                          value: GenderEnum.all,
-                          groupValue: _gender,
-                          onChanged: _filterGender,
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+              decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Flexible(
+                        child: ListTile(
+                          title: Text(GenderEnum.all.gender),
+                          leading: Radio<GenderEnum>(
+                            value: GenderEnum.all,
+                            groupValue: _gender,
+                            onChanged: _filterGender,
+                          ),
                         ),
                       ),
-                    ),
-                    Flexible(
-                      child: ListTile(
-                        title: Text(GenderEnum.male.gender),
-                        leading: Radio<GenderEnum>(
-                          value: GenderEnum.male,
-                          groupValue: _gender,
-                          onChanged: _filterGender,
+                      Flexible(
+                        child: ListTile(
+                          title: Text(GenderEnum.male.gender),
+                          leading: Radio<GenderEnum>(
+                            value: GenderEnum.male,
+                            groupValue: _gender,
+                            onChanged: _filterGender,
+                          ),
                         ),
                       ),
-                    ),
-                    Flexible(
-                      child: ListTile(
-                        title: Text(GenderEnum.female.gender),
-                        leading: Radio<GenderEnum>(
-                          value: GenderEnum.female,
-                          groupValue: _gender,
-                          onChanged: _filterGender,
+                      Flexible(
+                        child: ListTile(
+                          title: Text(GenderEnum.female.gender),
+                          leading: Radio<GenderEnum>(
+                            value: GenderEnum.female,
+                            groupValue: _gender,
+                            onChanged: _filterGender,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                Container(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                  child: TextField(
-                    controller: _controller,
-                    onChanged: _searchName,
-                    decoration:
-                        const InputDecoration(hintText: 'Search a bachelor'),
+                    ],
                   ),
-                ),
-              ],
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: TextField(
+                      controller: _controller,
+                      onChanged: _searchName,
+                      decoration:
+                          const InputDecoration(hintText: 'Search a bachelor'),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: filteredBachelorList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return BachelorPreview(bachelor: filteredBachelorList[index]);
-              },
-            ),
-          )
-        ],
-      )),
+            Expanded(
+              child: ListView.builder(
+                itemCount: filteredBachelorList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return BachelorPreview(bachelor: filteredBachelorList[index]);
+                },
+              ),
+            )
+          ],
+        ),
+      ),
       drawer: Drawer(
         child: ListView(
           children: [
@@ -137,9 +139,16 @@ class _FinderScreen extends State<FinderScreen> {
                 context.go('/liked');
               },
             ),
-            ListTile(
+            SwitchListTile(
               title: const Text('Toggle Theme Mode'),
-              onTap: () => AdaptiveTheme.of(context).toggleThemeMode(),//c'est de la merde --> to replace
+              value: AdaptiveTheme.of(context).mode.isDark,
+              onChanged: (value) {
+                if (value) {
+                  AdaptiveTheme.of(context).setDark();
+                } else {
+                  AdaptiveTheme.of(context).setLight();
+                }
+              },
             ),
           ],
         ),

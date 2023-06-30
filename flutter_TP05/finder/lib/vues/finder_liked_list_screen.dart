@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../models/bachelor.dart';
 import 'bachelor_grid_preview.dart';
 import 'bachelor_preview.dart';
 import 'finder_header_title.dart';
@@ -69,8 +70,21 @@ class _FinderLikedListScreen extends State<FinderLikedListScreen> {
             : ListView.builder(
                 itemCount: bachelorListProvider.getLikedBachelors.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return BachelorPreview(
-                      bachelor: bachelorListProvider.getLikedBachelors[index]);
+                  final Bachelor bachelor =
+                      bachelorListProvider.getLikedBachelors[index];
+                  return Dismissible(
+                      key: Key(bachelor.id.toString()),
+                      onDismissed: (direction) {
+                        setState(() {
+                          bachelorListProvider.removeOneLiked(bachelorListProvider.getLikedBachelors[index]);
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Bachelor removed from liked list')));
+                      },
+                      background: Container(color: Colors.red),
+                      child: BachelorPreview(
+                          bachelor:
+                              bachelorListProvider.getLikedBachelors[index]));
                 }),
       ),
       floatingActionButton: FloatingActionButton(
