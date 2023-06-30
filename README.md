@@ -22,3 +22,4 @@ Gauthier Cadet
 4. Part04 : bachelor liked list v2 ✅
 5. Part05 : fonctionnalités (tris, like et dislike) ✅
 6. Part06 : fonctionnalités (gridView, light/dark theme, swipe) ✅
+vidéo de présentation dans le dossier flutter_TP05
