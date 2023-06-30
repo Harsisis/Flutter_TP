@@ -23,3 +23,5 @@ Gauthier Cadet
 5. Part05 : fonctionnalités (tris, like et dislike) ✅
 6. Part06 : fonctionnalités (gridView, light/dark theme, swipe) ✅\
 vidéo de présentation dans le dossier flutter_TP05
+
+## TP06 : Météo 🔄️
