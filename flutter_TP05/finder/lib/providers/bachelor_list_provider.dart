@@ -4,13 +4,14 @@ import '../enums/gender_enum.dart';
 import '../models/bachelor.dart';
 
 class BachelorListProvider extends ChangeNotifier {
-  final List<Bachelor> _likedBachelorsList = [];
+  late List<Bachelor> _likedBachelorsList = [];
   late List<Bachelor> _bachelorsList = [];
   late List<Bachelor> _filteredBachelorsList = [];
 
   BachelorListProvider(List<Bachelor> bachelors) {
     _bachelorsList = bachelors;
     _filteredBachelorsList = bachelors;
+    _likedBachelorsList = <Bachelor>[bachelors[0], bachelors[2], bachelors[4]];
   }
 
   void addLiked(Bachelor bachelor) {

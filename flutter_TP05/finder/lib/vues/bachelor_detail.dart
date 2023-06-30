@@ -28,7 +28,7 @@ class _BachelorDetail extends State<BachelorDetail> {
         _bachelorList.addLiked(_bachelor);
 
         final snackBar = SnackBar(
-          content: const Text('Bachelor ajouté(e) à vos favoris'),
+          content: const Text('Bachelor added to liked list'),
           action: SnackBarAction(
             label: 'annuler',
             onPressed: _setLikeBachelor,
@@ -52,7 +52,7 @@ class _BachelorDetail extends State<BachelorDetail> {
         _bachelorList.hide(_bachelor);
 
         final snackBar = SnackBar(
-          content: const Text('Bachelor suprimé(e) de la liste'),
+          content: const Text('Bachelor removed from liked list'),
           action: SnackBarAction(
             label: 'annuler',
             onPressed: _setDislikeBachelor,

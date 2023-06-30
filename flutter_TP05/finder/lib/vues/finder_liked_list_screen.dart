@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import 'bachelor_grid_preview.dart';
 import 'bachelor_preview.dart';
 
 class FinderLikedListScreen extends StatefulWidget {
@@ -13,25 +14,69 @@ class FinderLikedListScreen extends StatefulWidget {
 }
 
 class _FinderLikedListScreen extends State<FinderLikedListScreen> {
+  bool _isGridMode = false;
   @override
   Widget build(BuildContext context) {
-    BachelorListProvider bachelorList = context.watch<BachelorListProvider>();
+    BachelorListProvider bachelorListProvider =
+        context.watch<BachelorListProvider>();
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text("Finder"), Icon(Icons.favorite_border_rounded)],
+          children: [
+            Text("Finder"),
+            Icon(Icons.favorite_border_rounded),
+          ],
         ),
+        actions: <Widget>[
+          if (_isGridMode)
+            IconButton(
+              icon: const Icon(Icons.grid_on),
+              onPressed: () {
+                setState(() {
+                  _isGridMode = false;
+                });
+              },
+            )
+          else
+            IconButton(
+              icon: const Icon(Icons.list),
+              onPressed: () {
+                setState(() {
+                  _isGridMode = true;
+                });
+              },
+            ),
+          IconButton(
+            icon: const Icon(Icons.delete),
+            tooltip: 'unlike all bachelors',
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('Unlike every liked bachelors')));
+              bachelorListProvider.removeAllLiked();
+            },
+          ),
+        ],
       ),
       body: Center(
-        child: ListView.builder(
-            itemCount: bachelorList.getLikedBachelors.length,
-            itemBuilder: (BuildContext context, int index) {
-              return BachelorPreview(
-                  bachelor: bachelorList.getLikedBachelors[index]);
-            }),
+        child: _isGridMode
+            ? GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                ),
+                itemCount: bachelorListProvider.getLikedBachelors.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return BachelorGridPreview(
+                      bachelor: bachelorListProvider.getLikedBachelors[index]);
+                })
+            : ListView.builder(
+                itemCount: bachelorListProvider.getLikedBachelors.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return BachelorPreview(
+                      bachelor: bachelorListProvider.getLikedBachelors[index]);
+                }),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.go('/'),

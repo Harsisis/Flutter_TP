@@ -16,6 +16,7 @@ class Finder extends StatelessWidget {
             create: (context) => BachelorListProvider(DataGiver().bachelors)),
       ],
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         title: "Finder",
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
