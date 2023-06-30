@@ -55,10 +55,10 @@ class BachelorListProvider extends ChangeNotifier {
   }
 
   List<Bachelor> get getFilteredBachelors {
-    return getFilteredBachlorList(GenderEnum.all, "");
+    return filterBachelorList(GenderEnum.all, "");
   }
 
-  List<Bachelor> getFilteredBachlorList(GenderEnum gender, String name) {
+  List<Bachelor> filterBachelorList(GenderEnum gender, String name) {
     return _bachelorsList
         .where((bach) => bach.hide == false)
         .where((bach) => bach.gender == gender || gender == GenderEnum.all)

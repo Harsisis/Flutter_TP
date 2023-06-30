@@ -18,26 +18,25 @@ class Finder extends StatelessWidget {
         ],
         child: AdaptiveTheme(
           light: ThemeData(
-            brightness: Brightness.light,
-            primarySwatch: Colors.amber,
-            hintColor: Colors.white,
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.amber,
+              background: Colors.white,
+            ),
+            useMaterial3: true,
           ),
           dark: ThemeData(
-            brightness: Brightness.dark,
-            primarySwatch: Colors.amber,
-            hintColor: Colors.black,
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.green,
+              background: Colors.grey,
+            ),
+            useMaterial3: true,
           ),
           initial: AdaptiveThemeMode.light,
           builder: (theme, darkTheme) => MaterialApp.router(
             debugShowCheckedModeBanner: false,
             title: "Finder",
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: Colors.amber,
-                background: Colors.white,
-              ),
-              useMaterial3: true,
-            ),
+            theme: theme,
+            darkTheme: darkTheme,
             routerConfig: router(),
           ),
         ));

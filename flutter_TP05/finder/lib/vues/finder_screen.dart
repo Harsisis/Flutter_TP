@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:finder/enums/gender_enum.dart';
 import 'package:finder/providers/bachelor_list_provider.dart';
 import 'package:flutter/material.dart';
@@ -33,23 +34,23 @@ class _FinderScreen extends State<FinderScreen> {
   void _searchName(String name) {
     setState(() {
       _name = name;
-      bachelorListProvider.setFilteredBachelors(
-          bachelorListProvider.getFilteredBachlorList(_gender, _name));
+      filteredBachelorList =
+          bachelorListProvider.filterBachelorList(_gender, _name);
     });
   }
 
   void _filterGender(GenderEnum? value) {
     setState(() {
       _gender = value!;
-      bachelorListProvider.setFilteredBachelors(
-          bachelorListProvider.getFilteredBachlorList(_gender, _name));
+      filteredBachelorList =
+          bachelorListProvider.filterBachelorList(_gender, _name);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     bachelorListProvider = context.watch<BachelorListProvider>();
-    filteredBachelorList = bachelorListProvider.getFilteredBachelors;
+    filteredBachelorList = bachelorListProvider.filterBachelorList(_gender, _name);
 
     return Scaffold(
       appBar: AppBar(
@@ -123,8 +124,6 @@ class _FinderScreen extends State<FinderScreen> {
       )),
       drawer: Drawer(
         child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
@@ -137,6 +136,10 @@ class _FinderScreen extends State<FinderScreen> {
               onTap: () {
                 context.go('/liked');
               },
+            ),
+            ListTile(
+              title: const Text('Toggle Theme Mode'),
+              onTap: () => AdaptiveTheme.of(context).toggleThemeMode(),//c'est de la merde --> to replace
             ),
           ],
         ),
