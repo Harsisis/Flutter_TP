@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../models/bachelor.dart';
 import '../providers/bachelor_list_provider.dart';
+import 'finder_header_title.dart';
 
 class BachelorDetail extends StatefulWidget {
   const BachelorDetail({super.key, required this.id});
@@ -15,7 +16,7 @@ class BachelorDetail extends StatefulWidget {
 class _BachelorDetail extends State<BachelorDetail> {
   bool _isLiked = false;
   bool _isDisliked = false;
-  late BachelorListProvider _bachelorList;
+  late BachelorListProvider _bachelorListProvider;
   late Bachelor _bachelor;
 
   void _setLikeBachelor() {
@@ -25,19 +26,19 @@ class _BachelorDetail extends State<BachelorDetail> {
         _isDisliked = true;
         _setDislikeBachelor();
 
-        _bachelorList.addLiked(_bachelor);
+        _bachelorListProvider.addLiked(_bachelor);
 
         final snackBar = SnackBar(
           content: const Text('Bachelor added to liked list'),
           action: SnackBarAction(
-            label: 'annuler',
+            label: 'cancel',
             onPressed: _setLikeBachelor,
           ),
           duration: const Duration(milliseconds: 500),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       } else {
-        _bachelorList.removeOneLiked(_bachelor);
+        _bachelorListProvider.removeOneLiked(_bachelor);
       }
     });
   }
@@ -49,36 +50,35 @@ class _BachelorDetail extends State<BachelorDetail> {
         _isLiked = true;
         _setLikeBachelor();
 
-        _bachelorList.hide(_bachelor);
+        _bachelorListProvider.hide(_bachelor);
+        _bachelorListProvider.getFilteredBachelors;
 
         final snackBar = SnackBar(
-          content: const Text('Bachelor removed from liked list'),
+          content: const Text('Bachelor removed from list'),
           action: SnackBarAction(
-            label: 'annuler',
+            label: 'cancel',
             onPressed: _setDislikeBachelor,
           ),
           duration: const Duration(milliseconds: 500),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       } else {
-        _bachelorList.show(_bachelor);
+        _bachelorListProvider.show(_bachelor);
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    _bachelorList = context.watch<BachelorListProvider>();
-    _bachelor = _bachelorList.getBachelorById(widget.id);
-    _isLiked = _bachelorList.getLikedBachelors.contains(_bachelor);
+    _bachelorListProvider = context.watch<BachelorListProvider>();
+    _bachelor = _bachelorListProvider.getBachelorById(widget.id);
+    _isLiked = _bachelorListProvider.getLikedBachelors.contains(_bachelor);
+    _isDisliked = _bachelor.hide;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text("Finder"), Icon(Icons.favorite_border_rounded)],
-        ),
+        title: const FinderHeaderTitle(),
       ),
       body: Center(
         child: Column(

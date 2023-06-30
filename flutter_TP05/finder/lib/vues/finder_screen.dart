@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../models/bachelor.dart';
 import 'bachelor_preview.dart';
+import 'finder_header_title.dart';
 
 class FinderScreen extends StatefulWidget {
   const FinderScreen({super.key});
@@ -53,10 +54,7 @@ class _FinderScreen extends State<FinderScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text("Finder"), Icon(Icons.favorite_border_rounded)],
-        ),
+        title: const FinderHeaderTitle(),
       ),
       body: Center(
           child: Column(
@@ -123,6 +121,26 @@ class _FinderScreen extends State<FinderScreen> {
           )
         ],
       )),
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.inversePrimary,
+              ),
+              child: const FinderHeaderTitle(),
+            ),
+            ListTile(
+              title: const Text('See Liked Bachelors'),
+              onTap: () {
+                context.go('/liked');
+              },
+            ),
+          ],
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.go('/liked'),
         tooltip: "go to liked bachelors page",

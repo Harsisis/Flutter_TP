@@ -73,10 +73,12 @@ class BachelorListProvider extends ChangeNotifier {
 
   void hide(Bachelor bachelor) {
     _bachelorsList.firstWhere((bach) => bach.id == bachelor.id).hide = true;
+    notifyListeners();
   }
 
   void show(Bachelor bachelor) {
     _bachelorsList.firstWhere((bach) => bach.id == bachelor.id).hide = false;
+    notifyListeners();
   }
 
   void setFilteredBachelors(List<Bachelor> list) {

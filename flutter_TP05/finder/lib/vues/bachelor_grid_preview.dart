@@ -20,7 +20,7 @@ class _BachelorGridPreview extends State<BachelorGridPreview> {
         context.go("/details/${widget.bachelor.id}");
       },
       child: Container(
-        margin: const EdgeInsets.all(5.0),
+        margin: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onTertiary,
           borderRadius: BorderRadius.circular(10.0),
@@ -37,15 +37,15 @@ class _BachelorGridPreview extends State<BachelorGridPreview> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              margin: const EdgeInsets.all(10.0),
+              margin: const EdgeInsets.all(5.0),
               padding: const EdgeInsets.all(10.0),
               decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.inverseSurface,
                   borderRadius: BorderRadius.circular(10.0)),
               child: Image.asset(
                 widget.bachelor.avatar,
-                height: 175,
-                width: 175,
+                height: 150,
+                width: 150,
               ),
             ),
             Expanded(
@@ -59,12 +59,6 @@ class _BachelorGridPreview extends State<BachelorGridPreview> {
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18)),
-                    Text(
-                      "${widget.bachelor.description}",
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: false,
-                      maxLines: 2,
-                    ),
                   ],
                 ),
               ),

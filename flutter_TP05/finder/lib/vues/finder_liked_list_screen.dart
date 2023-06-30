@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'bachelor_grid_preview.dart';
 import 'bachelor_preview.dart';
+import 'finder_header_title.dart';
 
 class FinderLikedListScreen extends StatefulWidget {
   const FinderLikedListScreen({super.key});
@@ -23,13 +24,7 @@ class _FinderLikedListScreen extends State<FinderLikedListScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("Finder"),
-            Icon(Icons.favorite_border_rounded),
-          ],
-        ),
+        title: const FinderHeaderTitle(),
         actions: <Widget>[
           if (_isGridMode)
             IconButton(
