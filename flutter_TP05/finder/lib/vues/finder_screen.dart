@@ -64,37 +64,53 @@ class _FinderScreen extends State<FinderScreen> {
           child: Column(
         children: [
           Container(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+            decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primaryContainer),
             child: Column(
               children: [
-                ListTile(
-                  title: Text(GenderEnum.all.gender),
-                  leading: Radio<GenderEnum>(
-                    value: GenderEnum.all,
-                    groupValue: _gender,
-                    onChanged: _filterGender,
-                  ),
+                Row(
+                  children: [
+                    Flexible(
+                      child: ListTile(
+                        title: Text(GenderEnum.all.gender),
+                        leading: Radio<GenderEnum>(
+                          value: GenderEnum.all,
+                          groupValue: _gender,
+                          onChanged: _filterGender,
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      child: ListTile(
+                        title: Text(GenderEnum.male.gender),
+                        leading: Radio<GenderEnum>(
+                          value: GenderEnum.male,
+                          groupValue: _gender,
+                          onChanged: _filterGender,
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      child: ListTile(
+                        title: Text(GenderEnum.female.gender),
+                        leading: Radio<GenderEnum>(
+                          value: GenderEnum.female,
+                          groupValue: _gender,
+                          onChanged: _filterGender,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                ListTile(
-                  title: Text(GenderEnum.male.gender),
-                  leading: Radio<GenderEnum>(
-                    value: GenderEnum.male,
-                    groupValue: _gender,
-                    onChanged: _filterGender,
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child: TextField(
+                    controller: _controller,
+                    onChanged: _searchName,
+                    decoration:
+                        const InputDecoration(hintText: 'Search a bachelor'),
                   ),
-                ),
-                ListTile(
-                  title: Text(GenderEnum.female.gender),
-                  leading: Radio<GenderEnum>(
-                    value: GenderEnum.female,
-                    groupValue: _gender,
-                    onChanged: _filterGender,
-                  ),
-                ),
-                TextField(
-                  controller: _controller,
-                  onChanged: _searchName,
-                  decoration:
-                      const InputDecoration(hintText: 'Search a bachelor'),
                 ),
               ],
             ),
