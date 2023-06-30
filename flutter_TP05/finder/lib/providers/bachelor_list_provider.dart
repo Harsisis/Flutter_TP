@@ -6,6 +6,7 @@ import '../models/bachelor.dart';
 class BachelorListProvider extends ChangeNotifier {
   late List<Bachelor> _likedBachelorsList = [];
   late List<Bachelor> _bachelorsList = [];
+  // ignore: unused_field
   late List<Bachelor> _filteredBachelorsList = [];
 
   BachelorListProvider(List<Bachelor> bachelors) {

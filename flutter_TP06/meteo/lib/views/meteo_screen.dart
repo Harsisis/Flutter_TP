@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-class Meteo extends StatelessWidget {
-  const Meteo({super.key});
+class MeteoScreen extends StatelessWidget {
+  const MeteoScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Finder",
+    return Center(
+      child: Column(children: [Text("Météo")]),
     );
   }
 }

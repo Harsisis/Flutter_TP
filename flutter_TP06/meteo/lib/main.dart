@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meteo/views/meteo_screen.dart';
+import 'package:meteo/views/meteo.dart';
 
 void main() {
   runApp(const Meteo());
