@@ -37,7 +37,7 @@ class _FinderScreen extends State<FinderScreen> {
     });
   }
 
-  void _sortGender(GenderEnum? value) {
+  void _filterGender(GenderEnum? value) {
     setState(() {
       _gender = value!;
       bachelorListProvider.setFilteredBachelors(bachelorListProvider
@@ -71,7 +71,7 @@ class _FinderScreen extends State<FinderScreen> {
                   leading: Radio<GenderEnum>(
                     value: GenderEnum.all,
                     groupValue: _gender,
-                    onChanged: _sortGender,
+                    onChanged: _filterGender,
                   ),
                 ),
                 ListTile(
@@ -79,7 +79,7 @@ class _FinderScreen extends State<FinderScreen> {
                   leading: Radio<GenderEnum>(
                     value: GenderEnum.male,
                     groupValue: _gender,
-                    onChanged: _sortGender,
+                    onChanged: _filterGender,
                   ),
                 ),
                 ListTile(
@@ -87,7 +87,7 @@ class _FinderScreen extends State<FinderScreen> {
                   leading: Radio<GenderEnum>(
                     value: GenderEnum.female,
                     groupValue: _gender,
-                    onChanged: _sortGender,
+                    onChanged: _filterGender,
                   ),
                 ),
                 TextField(
