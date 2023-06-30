@@ -19,31 +19,29 @@ class _FinderScreen extends State<FinderScreen> {
   late List<Bachelor> filteredBachelorList;
   late TextEditingController _controller;
   late GenderEnum _gender;
+  late String _name;
 
   @override
   void initState() {
     _controller = TextEditingController();
     _gender = GenderEnum.all;
+    _name = "";
     super.initState();
   }
 
   void _searchName(String name) {
     setState(() {
-      bachelorListProvider.setFilteredBachelors(bachelorListProvider
-          .getBachelors
-          .where((bach) =>
-              bach.firstname.toLowerCase().contains(name.toLowerCase()))
-          .toList());
+      _name = name;
+      bachelorListProvider.setFilteredBachelors(
+          bachelorListProvider.getFilteredBachlorList(_gender, _name));
     });
   }
 
   void _filterGender(GenderEnum? value) {
     setState(() {
       _gender = value!;
-      bachelorListProvider.setFilteredBachelors(bachelorListProvider
-          .getBachelors
-          .where((bach) => bach.gender == value || value == GenderEnum.all)
-          .toList());
+      bachelorListProvider.setFilteredBachelors(
+          bachelorListProvider.getFilteredBachlorList(_gender, _name));
     });
   }
 

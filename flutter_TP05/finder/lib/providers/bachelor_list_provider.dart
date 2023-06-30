@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
+import '../enums/gender_enum.dart';
 import '../models/bachelor.dart';
 
 class BachelorListProvider extends ChangeNotifier {
@@ -54,6 +55,15 @@ class BachelorListProvider extends ChangeNotifier {
 
   List<Bachelor> get getFilteredBachelors {
     return _filteredBachelorsList;
+  }
+
+  List<Bachelor> getFilteredBachlorList(GenderEnum gender, String name) {
+    return _bachelorsList
+        .where((bach) => bach.hide == false)
+        .where((bach) => bach.gender == gender || gender == GenderEnum.all)
+        .where(
+            (bach) => bach.firstname.toLowerCase().contains(name.toLowerCase()))
+        .toList();
   }
 
   Bachelor getBachelorById(int id) {
